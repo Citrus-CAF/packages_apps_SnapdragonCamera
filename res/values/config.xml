@@ -27,4 +27,13 @@
     <!-- This value may be changed to true to enable the warped pano preview overlayed on top
          of the fullscreen pano preview. -->
     <bool name="enable_warped_pano_preview">true</bool>
+
+    <!-- Restart preview for back camera onPictureTaken -->
+    <bool name="back_camera_restart_preview_onPictureTaken">false</bool>
+
+    <!-- Restart preview for front camera onPictureTaken -->
+    <bool name="front_camera_restart_preview_onPictureTaken">false</bool>
+
+    <!-- Restart preview for additional camera onPictureTaken -->
+    <bool name="additional_camera_restart_preview_onPictureTaken">false</bool>
 </resources>
