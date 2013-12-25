@@ -2999,6 +2999,12 @@ public class PhotoModule
         mErrorCallback.setActivity(mActivity);
         mCameraDevice.setErrorCallback(mErrorCallback);
 
+        // Preview needs to be stopped when changing resolution
+        if (mRestartPreview && mCameraState != PREVIEW_STOPPED && mCameraState != INIT) {
+            stopPreview();
+            mRestartPreview = false;
+        }
+
         if (!mSnapshotOnIdle) {
             mFocusManager.setAeAwbLock(false); // Unlock AE and AWB.
         }
