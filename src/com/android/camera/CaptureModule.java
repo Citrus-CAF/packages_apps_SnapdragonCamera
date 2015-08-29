@@ -2658,9 +2658,6 @@ public class CaptureModule implements CameraModule, PhotoController,
         switch (keyCode) {
             case KeyEvent.KEYCODE_VOLUME_UP:
             case KeyEvent.KEYCODE_VOLUME_DOWN:
-                if (CameraUtil.volumeKeyShutterDisable(mActivity)) {
-                    return false;
-                }
             case KeyEvent.KEYCODE_FOCUS:
                 if (mFirstTimeInitialized) {
                     if (event.getRepeatCount() == 0) {
@@ -2683,8 +2680,7 @@ public class CaptureModule implements CameraModule, PhotoController,
         switch (keyCode) {
             case KeyEvent.KEYCODE_VOLUME_UP:
             case KeyEvent.KEYCODE_VOLUME_DOWN:
-                if (mFirstTimeInitialized
-                        && !CameraUtil.volumeKeyShutterDisable(mActivity)) {
+                if (mFirstTimeInitialized) {
                     onShutterButtonClick();
                     return true;
                 }
