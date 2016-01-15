@@ -60,10 +60,6 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
-            <meta-data
-                android:name="com.android.keyguard.layout"
-                android:resource="@layout/keyguard_widget" />
         </activity>
 
         <activity
@@ -157,10 +153,6 @@
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
-            <meta-data
-                android:name="com.android.keyguard.layout"
-                android:resource="@layout/keyguard_widget" />
         </activity>
 
         <activity-alias
