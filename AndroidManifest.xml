@@ -48,6 +48,7 @@
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:icon="@mipmap/ic_launcher_camera"
             android:label="@string/snapcam_app_name"
+            android:exported="true"
             android:launchMode="singleTask"
             android:logo="@mipmap/ic_launcher_gallery"
             android:screenOrientation="portrait"
