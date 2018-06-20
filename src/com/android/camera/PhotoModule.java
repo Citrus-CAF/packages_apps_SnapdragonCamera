@@ -780,8 +780,8 @@ public class PhotoModule
         mParameters = mCameraDevice.getParameters();
         mInitialParams = mCameraDevice.getParameters();
         initializeCapabilities();
-        CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
-        mMirror = (info.facing == CameraInfo.CAMERA_FACING_FRONT);
+        CameraHolder.CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
+        mMirror = (info.facing == CameraHolder.CameraInfo.CAMERA_FACING_FRONT);
         mFocusManager.setMirror(mMirror);
         mFocusManager.setParameters(mInitialParams);
         setupPreview();
@@ -888,7 +888,7 @@ public class PhotoModule
     }
 
     void setPreviewFrameLayoutCameraOrientation(){
-        CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
+        CameraHolder.CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
         //if camera mount angle is 0 or 180, we want to resize preview
         if (info.orientation % 180 == 0){
             mUI.cameraOrientationPreviewResize(true);
@@ -1017,9 +1017,9 @@ public class PhotoModule
                || mFaceDetectionStarted || mCameraState != IDLE) return;
         if (mParameters.getMaxNumDetectedFaces() > 0) {
             mFaceDetectionStarted = true;
-            CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
+            CameraHolder.CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
             mUI.onStartFaceDetection(mDisplayOrientation,
-                    (info.facing == CameraInfo.CAMERA_FACING_FRONT));
+                    (info.facing == CameraHolder.CameraInfo.CAMERA_FACING_FRONT));
             mCameraDevice.setFaceDetectionCallback(mHandler, mUI);
             mCameraDevice.startFaceDetection();
         }
@@ -1391,11 +1391,11 @@ public class PhotoModule
                     && (mSnapshotMode != CameraInfoWrapper.CAMERA_SUPPORT_MODE_ZSL)
                     && (mReceivedSnapNum == mBurstSnapNum);
 
-            CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
+            CameraHolder.CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
 
-            final boolean isAuxCamera = info.facing > CameraInfo.CAMERA_FACING_FRONT;
-            final boolean isBackCamera = info.facing == CameraInfo.CAMERA_FACING_BACK;
-            final boolean isFrontCamera = info.facing == CameraInfo.CAMERA_FACING_FRONT;
+            final boolean isAuxCamera = info.facing > CameraHolder.CameraInfo.CAMERA_FACING_FRONT;
+            final boolean isBackCamera = info.facing == CameraHolder.CameraInfo.CAMERA_FACING_BACK;
+            final boolean isFrontCamera = info.facing == CameraHolder.CameraInfo.CAMERA_FACING_FRONT;
             final boolean auxCameraRestartPreviewOnPictureTaken = mApplicationContext
                     .getResources().getBoolean(R.bool.additional_camera_restart_preview_onPictureTaken);
             final boolean backCameraRestartPreviewOnPictureTaken = mApplicationContext
@@ -2142,7 +2142,7 @@ public class PhotoModule
                 mCameraId, CameraHolder.instance().getCameraInfo());
         mPreferenceGroup = settings.getPreferenceGroup(R.xml.camera_preferences);
 
-        int numOfCams = Camera.getNumberOfCameras();
+        int numOfCams = CameraHolder.instance().getNumberOfCameras();
 
         Log.e(TAG,"loadCameraPreferences() updating camera_id pref");
 
@@ -2160,8 +2160,8 @@ public class PhotoModule
         int[] largeIconIds = new int[numOfCams];
 
         for(int i=0;i<numOfCams;i++) {
-            CameraInfo info = CameraHolder.instance().getCameraInfo()[i];
-            if(info.facing == CameraInfo.CAMERA_FACING_BACK) {
+            CameraHolder.CameraInfo info = CameraHolder.instance().getCameraInfo()[i];
+            if(info.facing == CameraHolder.CameraInfo.CAMERA_FACING_BACK) {
                 iconIds[i] = R.drawable.ic_switch_back;
                 entries[i] = mActivity.getResources().getString(R.string.pref_camera_id_entry_back);
                 labels[i] = mActivity.getResources().getString(R.string.pref_camera_id_label_back);
@@ -2731,8 +2731,8 @@ public class PhotoModule
         if (mFocusManager != null) {
             mFocusManager.removeMessages();
         } else {
-            CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
-            mMirror = (info.facing == CameraInfo.CAMERA_FACING_FRONT);
+            CameraHolder.CameraInfo info = CameraHolder.instance().getCameraInfo()[mCameraId];
+            mMirror = (info.facing == CameraHolder.CameraInfo.CAMERA_FACING_FRONT);
             String[] defaultFocusModes = mActivity.getResources().getStringArray(
                     R.array.pref_camera_focusmode_default_array);
             mFocusManager = new FocusOverlayManager(mPreferences, defaultFocusModes,
