@@ -181,6 +181,7 @@ public class CameraUtil {
     }
 
     public static boolean isVideoSnapshotSupported(Parameters params) {
+        if (params == null) return false;
         return TRUE.equals(params.get(VIDEO_SNAPSHOT_SUPPORTED));
     }
 
