@@ -855,7 +855,7 @@ public class CaptureModule implements CameraModule, PhotoController,
                 }
             }
 
-            detectHDRMode(result, id);
+            //detectHDRMode(result, id);
             processCaptureResult(result);
             mPostProcessor.onMetaAvailable(result);
         }
@@ -2802,7 +2802,7 @@ public class CaptureModule implements CameraModule, PhotoController,
         applyExposureMeteringModes(builder);
         applyHistogram(builder);
         applyEarlyPCR(builder);
-        applyAWBCCTAndAgain(builder);
+        //applyAWBCCTAndAgain(builder);
         applyBGStats(builder);
         applyBEStats(builder);
         applyWbColorTemperature(builder);
@@ -5311,6 +5311,8 @@ public class CaptureModule implements CameraModule, PhotoController,
     }
 
     private void applyExposureMeteringModes(CaptureRequest.Builder request) {
+        if (!VendorTagUtil.isSupported(request, CaptureModule.exposure_metering))
+            return;
         String value = mSettingsManager.getValue(SettingsManager.KEY_EXPOSURE_METERING_MODE);
         if (value != null) {
             int intValue = Integer.parseInt(value);
